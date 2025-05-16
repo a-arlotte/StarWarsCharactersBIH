@@ -8,6 +8,10 @@ The app lists characters from the show, including their detailed info.
 
 Characters can be liked
 
+Characters review can be added
+
+This is submitted to the api, but this will fail
+
 
 ## Setup
 
