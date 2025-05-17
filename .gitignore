@@ -1,0 +1,73 @@
+## Build results
+bin/
+obj/
+out/
+[Bb]uild/
+[Ll]og/
+
+## VS Code and Rider
+.vscode/
+.idea/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Mono Auto Generated Files
+mono_crash.*
+
+## ASP.NET
+appsettings.*.json
+appsettings.Development.json
+appsettings.Local.json
+*.db
+*.log
+
+## Others
+*.pdb
+*.cache
+*.bak
+*.tmp
+
+## Visual Studio
+.vs/
+*.csproj.user
+*.sln.ide
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+## Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+*.testsettings
+
+## Windows image file caches
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+## Web publish
+.publish/
+
+## Local history
+.history/
+
+## DotCover
+.idea/.dotCover
+
+## JetBrains Rider
+.idea/
+
+## Logs
+*.log
+logs/
