@@ -32,7 +32,8 @@ appsettings.Local.json
 *.tmp
 
 ## Visual Studio
-.vs/
+**/.vs/
+**/obj/
 *.csproj.user
 *.sln.ide
 

@@ -23,3 +23,14 @@ Requires Node >20
 
 ### Backend
 
+C# .Net 8 api
+
+Runs against:
+https://swapi.info/ 
+
+
+### Unit Tests
+
+In StarWarsApi.Tests
+
+These can be run in Visual Studio

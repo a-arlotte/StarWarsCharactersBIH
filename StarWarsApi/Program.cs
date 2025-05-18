@@ -1,6 +1,7 @@
 
 using StarWarsApi.Constants;
 using StarWarsApi.Controllers;
+using StarWarsApi.Services;
 
 namespace StarWarsApi
 {
@@ -10,15 +11,17 @@ namespace StarWarsApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddHttpClient<PeopleController>();
+            builder.Services.AddHttpClient();
 
-            builder.Services.Configure<Api>(builder.Configuration.GetSection(nameof(Api)));
+            // Register Services
+            RegisterProjectServices(builder);
+
+            // Register Options
+            RegisterProjectOptions(builder);
 
             var app = builder.Build();
 
@@ -33,10 +36,28 @@ namespace StarWarsApi
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
+        }
+
+
+        /// <summary>
+        /// Register all of the services in the project here
+        /// </summary>
+        /// <param name="builder"></param>
+        public static void RegisterProjectServices(WebApplicationBuilder builder)
+        {
+            builder.Services.AddTransient<IPeopleService, PeopleService>();
+        }
+
+        /// <summary>
+        /// Register all of the options in the project here
+        /// </summary>
+        /// <param name="builder"></param>
+        public static void RegisterProjectOptions(WebApplicationBuilder builder)
+        {
+            builder.Services.Configure<Api>(builder.Configuration.GetSection(nameof(Api)));
         }
     }
 }

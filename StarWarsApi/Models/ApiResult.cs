@@ -6,11 +6,11 @@ namespace StarWarsApi.Models
     public class ApiResult<T>
     {
         public int StatusCode { get; set; }
-        public List<string> Errors { get; set; }
+        public List<string> Errors { get; set; } = new List<string>();
         public bool Success { get; set; }
         public T Data { get; set; }
 
-        public static ApiResult<T> SuccessResult(T data, List<string> errors = new List<string>)
+        public static ApiResult<T> SuccessResult(T data, List<string> errors = null)
         {
             return new ApiResult<T> { Success = true, StatusCode = 200, Data = data, Errors = errors };
         }

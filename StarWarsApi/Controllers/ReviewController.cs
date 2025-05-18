@@ -9,13 +9,13 @@ namespace StarWarsApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PeopleController : ControllerBase
+public class ReviewController : ControllerBase
 {
     private readonly ILogger<PeopleController> _logger;
     private readonly Api _apiSettings;
     private IPeopleService _peopleService;
 
-    public PeopleController(ILogger<PeopleController> logger, IOptions<Api> options, IPeopleService peopleService)
+    public ReviewController(ILogger<PeopleController> logger, IOptions<Api> options, IPeopleService peopleService)
     {
         _logger = logger;
         _apiSettings = options.Value;
@@ -23,22 +23,25 @@ public class PeopleController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ApiResult<List<People>>> Get()
+    public async Task<ApiResult<bool>> ReviewCharacter()
     {
         var transactionId = Guid.NewGuid().ToString();
         try
         {
-            var people = await _peopleService.GetPeople();
-            return ApiResult<List<People>>.SuccessResult(people);
+            // code would go here...
+
+            // for now, throw error
+            throw new NotImplementedException();
         }
-        catch (HttpRequestException ex)
+        catch (NotImplementedException ex)
         {
             var errors = new List<string>();
             errors.Add(ex.Message);
             var logMessage = $"TransactionId: {transactionId} Error getting data from endpoint {Endpoints.People}";
             errors.Add(logMessage);
             _logger.LogError(ex, logMessage);
-            return ApiResult<List<People>>.Failure(errors);
+            var result = ApiResult<bool>.Failure(errors);
+            return await Task.FromResult(result);
         }
     }
 }
