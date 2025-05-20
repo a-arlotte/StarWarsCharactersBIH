@@ -14,39 +14,29 @@
 			<v-card-text>
 				<v-list dense>
 					<v-list-item>
-						<v-list-item-content>
-							<v-list-item-title>Height</v-list-item-title>
-							<v-list-item-subtitle
-								>{{ character.height }} cm</v-list-item-subtitle
-							>
-						</v-list-item-content>
+						<v-list-item-title>Height</v-list-item-title>
+						<v-list-item-subtitle
+							>{{ character.height }} cm</v-list-item-subtitle
+						>
 					</v-list-item>
 
 					<v-list-item>
-						<v-list-item-content>
-							<v-list-item-title>Mass</v-list-item-title>
-							<v-list-item-subtitle
-								>{{ character.mass }} kg</v-list-item-subtitle
-							>
-						</v-list-item-content>
+						<v-list-item-title>Mass</v-list-item-title>
+						<v-list-item-subtitle>{{ character.mass }} kg</v-list-item-subtitle>
 					</v-list-item>
 
 					<v-list-item>
-						<v-list-item-content>
-							<v-list-item-title>Skin Color</v-list-item-title>
-							<v-list-item-subtitle>{{
-								character.skin_color
-							}}</v-list-item-subtitle>
-						</v-list-item-content>
+						<v-list-item-title>Skin Color</v-list-item-title>
+						<v-list-item-subtitle>{{
+							character.skin_color
+						}}</v-list-item-subtitle>
 					</v-list-item>
 
 					<v-list-item>
-						<v-list-item-content>
-							<v-list-item-title>Birth Year</v-list-item-title>
-							<v-list-item-subtitle>{{
-								character.birth_year
-							}}</v-list-item-subtitle>
-						</v-list-item-content>
+						<v-list-item-title>Birth Year</v-list-item-title>
+						<v-list-item-subtitle>{{
+							character.birth_year
+						}}</v-list-item-subtitle>
 					</v-list-item>
 				</v-list>
 			</v-card-text>
