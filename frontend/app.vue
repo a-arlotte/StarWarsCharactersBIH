@@ -6,7 +6,6 @@
 			<v-navigation-drawer>
 				<v-list nav>
 					<v-list-item link title="Home" to="/"></v-list-item>
-
 					<v-list-item link title="About" to="/about"></v-list-item>
 				</v-list>
 			</v-navigation-drawer>

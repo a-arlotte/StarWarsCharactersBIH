@@ -3,18 +3,20 @@
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "esModuleInterop": true,
-    "lib": ["es2020"],
+    "lib": ["ESNext", "DOM"],
     "module": "es2022",
     "preserveConstEnums": true,
     "moduleResolution": "node",
     "strict": true,
     "sourceMap": true,
     "target": "es2022",
-    "types": ["node"],
+    "types": ["node", "nuxt"],
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "-modals/*": ["models/*"]
+      "-models/*": ["models/*"],
+      "~/*": ["./*"],
+      "@/*": ["./*"]
     }
   },
 }

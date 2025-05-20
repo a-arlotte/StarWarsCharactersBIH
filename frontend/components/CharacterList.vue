@@ -9,47 +9,27 @@
 
 		<v-table class="elevation-1">
 			<DataRow
-				v-for="item in filteredItems"
-				:key="item.email"
+				v-for="item in items"
+				:key="item.name"
 				:item="item"
 				@view="viewItem"
-				@edit="editItem"
 			/>
 		</v-table>
 	</v-container>
 </template>
   
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
+import type { PropType } from "vue";
+import type { Character } from "~/models/character";
 
-const search = ref("");
-const headers = [
-	{ text: "Name", value: "name" },
-	{ text: "Email", value: "email" },
-	{ text: "Actions", value: "actions", sortable: false },
-];
-
-const items = ref([
-	{ name: "Alice Smith", email: "alice@example.com" },
-	{ name: "Bob Johnson", email: "bob@example.com" },
-	{ name: "Charlie Rose", email: "charlie@example.com" },
-	{ name: "Diana Prince", email: "diana@example.com" },
-]);
-
-const filteredItems = computed(() => {
-	if (!search.value) return items.value;
-	return items.value.filter(
-		(item) =>
-			item.name.toLowerCase().includes(search.value.toLowerCase()) ||
-			item.email.toLowerCase().includes(search.value.toLowerCase())
-	);
+const props = defineProps({
+	items: Object as PropType<Character[]>,
 });
 
-function viewItem(item) {
-	alert(`Viewing ${item.name}`);
-}
+const search = ref("");
 
-function editItem(item) {
-	alert(`Editing ${item.name}`);
+function viewItem(item: Character) {
+	alert(`Viewing ${item.name}`);
 }
 </script>

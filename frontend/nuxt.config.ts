@@ -2,6 +2,11 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      apiUrl: "http://localhost:5000/api"
+    }
+  },
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
   build: {

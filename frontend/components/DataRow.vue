@@ -1,21 +1,22 @@
 <template>
 	<tr>
-		<td>{{ item.name }}</td>
-		<td>{{ item.email }}</td>
+		<td>{{ props.item.name }}</td>
+		<td>{{ props.item.mass }}</td>
 		<td>
-			<v-btn icon @click="$emit('view', item)">
+			<v-btn icon @click="$emit('view', props.item)">
 				<v-icon>mdi-eye</v-icon>
-			</v-btn>
-			<v-btn icon @click="$emit('edit', item)">
-				<v-icon>mdi-pencil</v-icon>
 			</v-btn>
 		</td>
 	</tr>
 </template>
   
-<script setup>
-defineProps({
-	item: Object,
+<script setup lang="ts">
+import type { PropType } from "vue";
+import type { Character } from "~/models/character";
+
+const props = defineProps({
+	item: Object as PropType<Character>,
 });
-defineEmits(["view", "edit"]);
+
+defineEmits(["view"]);
 </script>
