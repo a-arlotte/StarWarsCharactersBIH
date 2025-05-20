@@ -17,6 +17,18 @@ namespace StarWarsApi
             builder.Services.AddSwaggerGen();
             builder.Services.AddHttpClient();
 
+            // CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy
+                    .WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+
             // Register Services
             RegisterProjectServices(builder);
 
@@ -35,6 +47,8 @@ namespace StarWarsApi
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            app.UseCors();
 
             app.MapControllers();
 
