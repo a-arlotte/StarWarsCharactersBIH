@@ -22,7 +22,7 @@ public class ReviewController : ControllerBase
         _peopleService = peopleService;
     }
 
-    [HttpGet]
+    [HttpPost]
     public async Task<ApiResult<bool>> ReviewCharacter()
     {
         var transactionId = Guid.NewGuid().ToString();
