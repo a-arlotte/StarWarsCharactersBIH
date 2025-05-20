@@ -20,3 +20,8 @@
 		</v-layout>
 	</v-app>
 </template>
+
+
+<style lang="scss">
+@use "~/assets/colours.scss";
+</style>
