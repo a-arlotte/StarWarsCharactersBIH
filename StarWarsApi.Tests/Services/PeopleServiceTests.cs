@@ -82,8 +82,9 @@ namespace StarWarsApi.Tests.Services
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count);
-
-
+            var first = result.FirstOrDefault();
+            Assert.IsNotNull(first);
+            Assert.AreEqual(1, first.Id);
         }
     }
 }

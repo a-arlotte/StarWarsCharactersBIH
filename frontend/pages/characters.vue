@@ -12,7 +12,7 @@ import type { Character } from "~/models/character";
 
 const config = useRuntimeConfig();
 
-const items = ref<Character[]>([]);
+let items = ref<Character[]>([]);
 const error = ref("");
 
 async function fetchData() {
@@ -21,7 +21,8 @@ async function fetchData() {
 		console.log(url);
 		const res = await fetch(url);
 		if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-		items = await res.json();
+		let apiResult = await res.json();
+		items = apiResult.data;
 	} catch (e) {
 		error.value = (e as Error).message;
 	}

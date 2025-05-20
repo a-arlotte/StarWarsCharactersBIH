@@ -3,9 +3,7 @@
 		<td>{{ props.item.name }}</td>
 		<td>{{ props.item.mass }}</td>
 		<td>
-			<v-btn icon @click="$emit('view', props.item)">
-				<v-icon>mdi-eye</v-icon>
-			</v-btn>
+			<v-btn variant="text" :to="`/character/${props.item.id}`">View</v-btn>
 		</td>
 	</tr>
 </template>
@@ -17,6 +15,4 @@ import type { Character } from "~/models/character";
 const props = defineProps({
 	item: Object as PropType<Character>,
 });
-
-defineEmits(["view"]);
 </script>

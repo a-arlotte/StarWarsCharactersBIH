@@ -23,9 +23,7 @@ namespace StarWarsApi
                 options.AddPolicy("AllowFrontend", policy =>
                 {
                     policy
-                    .WithOrigins("http://localhost:3000")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    .WithOrigins("http://localhost:3000");
                 });
             });
 
@@ -48,7 +46,7 @@ namespace StarWarsApi
 
             app.UseAuthorization();
 
-            app.UseCors();
+            app.UseCors("AllowFrontend");
 
             app.MapControllers();
 

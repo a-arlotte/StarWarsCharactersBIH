@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using StarWarsApi.Constants;
 using StarWarsApi.Models;
+using System.Reflection.PortableExecutable;
 using System.Text.Json;
 
 namespace StarWarsApi.Services
@@ -35,7 +36,17 @@ namespace StarWarsApi.Services
                     return new List<People>();
 
                 }
-                return result;
+                return result.Select((item, index) => new People
+                {
+                    Id = index + 1,       // Generate ID from index (starting at 1)
+                    Name = item.Name,
+                    Height = item.Height,
+                    Mass = item.Mass,
+                    SkinColour = item.SkinColour,
+                    BirthYear = item.BirthYear,
+                    Gender = item.Gender
+                })
+                    .ToList();
             }
             catch (HttpRequestException ex)
             {

@@ -4,6 +4,8 @@ namespace StarWarsApi.Models
 {
     public class People
     {
+        public int Id { get; set; }
+
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
 

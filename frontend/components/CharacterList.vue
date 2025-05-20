@@ -7,10 +7,10 @@
 			class="mb-4"
 		></v-text-field>
 
-		<v-table class="elevation-1">
+		<v-table class="elevation-1 overflow-y-auto">
 			<DataRow
 				v-for="item in items"
-				:key="item.name"
+				:key="item.id"
 				:item="item"
 				@view="viewItem"
 			/>
@@ -32,4 +32,8 @@ const search = ref("");
 function viewItem(item: Character) {
 	alert(`Viewing ${item.name}`);
 }
+
+onMounted(() => {
+	console.log("Character list mounted");
+});
 </script>
