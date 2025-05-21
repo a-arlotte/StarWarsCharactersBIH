@@ -20,6 +20,7 @@ export default defineNuxtConfig({
       })
     },
     //...
+    '@pinia/nuxt'
   ],
   vite: {
     vue: {
@@ -30,8 +31,9 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "~/assets/_colours.scss" as *;'
+          additionalData: '@use "~/assets/colours.scss" as *;'
         }
       }
     },
-  })
+  }
+})

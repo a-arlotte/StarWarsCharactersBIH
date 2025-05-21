@@ -19,7 +19,7 @@ This is submitted to the api, but this will fail
 
 Information on how to setup and install the frontend is in the ReadMe in the frontend folder
 
-Requires Node >20
+Requires Node >=22
 
 ### Backend
 
@@ -34,3 +34,35 @@ https://swapi.info/
 In StarWarsApi.Tests
 
 These can be run in Visual Studio
+
+# Running
+
+## Frontend
+
+`cd frontend`
+
+`npm run dev`
+
+
+## Backend
+
+`cd StarWarsApi`
+
+run
+
+`docker compose up`
+
+or
+
+`docker compose up --build`
+
+Should run it on localhost:5000
+
+This is what nuxt config is looking for.
+
+If running in Visual Studio, or for some reason it is different, 
+go to nuxt.config.ts
+
+change apiUrl to correct localhost port
+
+

@@ -1,92 +1,80 @@
 <template>
 	<div>
 		<v-progress-circular
-			v-if="loading"
+			v-if="reviewStore.loading"
 			indeterminate
 			color="primary"
 			size="40"
 		></v-progress-circular>
-		<v-card v-else class="mx-auto" max-width="400" outlined>
-			<div v-if="error" style="color: red">{{ error }}</div>
+		<v-container v-else>
+			<div v-if="reviewStore.error" style="color: red">
+				{{ reviewStore.error }}
+			</div>
+			<v-form ref="reviewForm">
+				<v-app-bar-title class="ma-1 mb-3">
+					{{ character.name }} Review!
+				</v-app-bar-title>
+				<v-text-field
+					label="Your Name"
+					v-model="review.name"
+					required
+				></v-text-field>
+				<v-date-picker v-model="review.dateWatched"></v-date-picker>
 
-			<v-card-title>Character Review</v-card-title>
-			<v-card-subtitle>{{ character.name }}</v-card-subtitle>
+				<v-textarea
+					label="Review Details"
+					v-model="review.details"
+					rows="3"
+				></v-textarea>
 
-			<v-card-text>
-				<v-list dense>
-					<v-list-item>
-						<v-list-item-title>Gender</v-list-item-title>
-						<v-list-item-subtitle>{{ character.gender }}</v-list-item-subtitle>
-					</v-list-item>
-					<v-list-item>
-						<v-list-item-title>Height</v-list-item-title>
-						<v-list-item-subtitle
-							>{{ character.height }} cm
-						</v-list-item-subtitle>
-					</v-list-item>
+				<v-select
+					label="Rating"
+					v-model="review.rating"
+					:items="ratings"
+				></v-select>
 
-					<v-list-item>
-						<v-list-item-title>Mass</v-list-item-title>
-						<v-list-item-subtitle>{{ character.mass }} kg</v-list-item-subtitle>
-					</v-list-item>
-
-					<v-list-item>
-						<v-list-item-title>Skin Color</v-list-item-title>
-						<v-list-item-subtitle>{{
-							character.skin_color
-						}}</v-list-item-subtitle>
-					</v-list-item>
-
-					<v-list-item>
-						<v-list-item-title>Birth Year</v-list-item-title>
-						<v-list-item-subtitle>{{
-							character.birth_year
-						}}</v-list-item-subtitle>
-					</v-list-item>
-				</v-list>
-			</v-card-text>
-		</v-card>
+				<v-btn color="primary" @click="reviewStore.submitReview"
+					>Submit Review</v-btn
+				>
+			</v-form>
+		</v-container>
 	</div>
 </template>
+
   
-  <script setup lang="ts">
+<script setup lang="ts">
+import type { Review } from "~/models/review";
+import { useReviewStore } from "~/stores/reviewStore";
+
 import type { Character } from "~/models/character";
+import { useCharacterStore } from "~/stores/characterStore";
 
-const route = useRoute();
+const characterStore = useCharacterStore();
+const reviewStore = useReviewStore();
 
-let character = ref<Character>();
+const ratings = Array.from({ length: 10 }, (_, i) => i + 1);
 
-const error = ref("");
-const loading = ref(true);
+let character = ref<Character>({
+	id: 0,
+	name: "",
+	height: "",
+	mass: "",
+	skin_color: "",
+	birth_year: "",
+	gender: "",
+	likes: 0,
+});
 
-const config = useRuntimeConfig();
+let review = ref<Review>({
+	name: "",
+	dateWatched: "",
+	details: "",
+	rating: null,
+});
 
-// having to go get the data again because I don't have an endpoint
-// normally would have endpoint to get by id
-// but id is being generated
-async function fetchData() {
-	try {
-		let url = `${config.public.apiUrl}/people`;
-		console.log(url);
-		const res = await fetch(url);
-		if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-		let apiResult = await res.json();
-		// data is an array
-		// get the one with the id
-		const routeId = Number(route.params.id);
-		character = apiResult.data.find((x) => x.id === routeId) || null;
-
-		if (!character) {
-			console.warn("Character not found for id:", routeId);
-		}
-
-		loading.value = false;
-	} catch (e) {
-		error.value = (e as Error).message;
-	}
-}
-
-onMounted(() => {
-	fetchData();
+onMounted(async () => {
+	const route = useRoute();
+	await characterStore.ensureCharactersLoaded();
+	character.value = characterStore.getCharacterById(Number(route.params.id));
 });
 </script>

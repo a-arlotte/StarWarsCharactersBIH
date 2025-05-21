@@ -24,5 +24,8 @@ namespace StarWarsApi.Models
         [JsonPropertyName("gender")]
         public string Gender { get; set; } = string.Empty;
 
+        [JsonPropertyName("likes")]
+        public int Likes { get; set; } = 0;
+
     }
 }
