@@ -6,7 +6,6 @@ export interface Character {
     skin_color: string,
     birth_year: string,
     gender: string,
-    likes: number
+    likes: number,
+    url: string
 }
-
-
