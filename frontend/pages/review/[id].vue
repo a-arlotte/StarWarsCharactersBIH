@@ -9,15 +9,16 @@
 		<v-container v-else>
 			<div v-if="reviewStore.error" style="color: red">
 				{{ reviewStore.error }}
+				<v-btn @click="reviewStore.clearError">Dismiss</v-btn>
 			</div>
-			<v-form ref="reviewForm">
+			<v-form @submit.prevent ref="formRef">
 				<v-app-bar-title class="ma-1 mb-3">
 					{{ character.name }} Review!
 				</v-app-bar-title>
 				<v-text-field
 					label="Your Name"
 					v-model="review.name"
-					required
+					:rules="rules"
 				></v-text-field>
 				<v-date-picker v-model="review.dateWatched"></v-date-picker>
 
@@ -25,15 +26,17 @@
 					label="Review Details"
 					v-model="review.details"
 					rows="3"
+					:rules="rules"
 				></v-textarea>
 
 				<v-select
 					label="Rating"
 					v-model="review.rating"
 					:items="ratings"
+					:rules="rules"
 				></v-select>
 
-				<v-btn color="primary" @click="reviewStore.submitReview"
+				<v-btn type="submit" color="primary" @click="submit"
 					>Submit Review</v-btn
 				>
 			</v-form>
@@ -54,6 +57,13 @@ const reviewStore = useReviewStore();
 
 const ratings = Array.from({ length: 10 }, (_, i) => i + 1);
 
+const rules = [
+	(value) => {
+		if (value) return true;
+		return "You must enter a value.";
+	},
+];
+
 let character = ref<Character>({
 	id: 0,
 	name: "",
@@ -72,9 +82,19 @@ let review = ref<Review>({
 	rating: null,
 });
 
+const formRef = ref();
+
 onMounted(async () => {
 	const route = useRoute();
 	await characterStore.ensureCharactersLoaded();
 	character.value = characterStore.getCharacterById(Number(route.params.id));
 });
+
+// form submission
+const submit = async () => {
+	const { valid } = await formRef.value.validate();
+	if (valid) {
+		reviewStore.submitReview(review.value);
+	}
+};
 </script>

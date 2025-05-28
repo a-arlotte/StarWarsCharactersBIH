@@ -16,6 +16,7 @@ export const useReviewStore = defineStore('review', {
     actions: {
         async submitReview(review: Review) {
             try {
+                clearError();
                 var config = useRuntimeConfig();
 
                 let url = `${config.public.apiUrl}/review`;
@@ -31,6 +32,9 @@ export const useReviewStore = defineStore('review', {
                 this.error = (e as Error).message;
             }
         },
-
+        clearError() {
+            // reset error
+            this.error = null;
+        }
     }
 })
